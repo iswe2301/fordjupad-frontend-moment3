@@ -1,5 +1,5 @@
 // Importerar nödvändiga paket
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
 // Importerar typer (interfaces)
 import { AuthContextType, User, LoginCredentials, AuthResponse } from "../types/auth.types";
@@ -55,6 +55,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.removeItem("token");
         setUser(null);
     }
+
+    // Validera token
+    const checkToken = async () => {
+
+        // Hämtar token från localStorage
+        const token = localStorage.getItem("token");
+
+        // Kontrollerar om token finns
+        if (!token) {
+            return; // Avslutar funktionen om token inte finns
+        }
+
+        // Genomför ett GET-anrop till backend
+        try {
+            const res = await fetch("http://localhost:5000/api/auth/checkToken", {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${token}` // Skickar med token i headern
+                }
+            });
+
+            // Kontrollerar om anropet lyckades
+            if (res.ok) {
+                // Hämtar data från responsen av typen User
+                const data = await res.json() as User;
+                setUser(data); // Uppdaterar state med användaren
+            }
+            // Vid ogiltig token
+        } catch (error) {
+            localStorage.removeItem("token"); // Tar bort Jtoken från localStorage
+            setUser(null); // Uppdaterar state för användaren med null
+        }
+    }
+
+    // Använder useEffect för att anropa funktionen checkToken vid varje render
+    useEffect(() => {
+        checkToken(); // Anropar funktionen checkToken
+    }, [])
 
     // Returnerar contexten för autentisering med värdena user, login och logout
     return (
