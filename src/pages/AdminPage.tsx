@@ -5,8 +5,6 @@ const AdminPage = () => {
   // Hämtar user från AuthContext
   const { user } = useAuth();
 
-  console.log(user);
-
   return (
     <div>
       {/* Hämtar förnamn från user och visar det om det finns, annars tom textsträng */}
