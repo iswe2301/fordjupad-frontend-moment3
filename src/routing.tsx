@@ -6,6 +6,7 @@ import StartPage from "./pages/StartPage";
 import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Skapar en router
 const router = createBrowserRouter([
@@ -19,7 +20,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/mina-sidor", // Sökväg för mina sidor
-                element: <AdminPage /> // Komponent som ska visas
+                element: (
+                    <ProtectedRoute> {/* Skyddar sidan med ProtectedRoute */}
+                        <AdminPage /> {/* Komponent som ska visas när användaren är inloggad */}
+                    </ProtectedRoute>
+                )
             },
             {
                 path: "/logga-in", // Sökväg för inloggningssidan
