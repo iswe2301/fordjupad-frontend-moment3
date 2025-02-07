@@ -1,7 +1,16 @@
+import { useAuth } from "../context/AuthContext"; // Importerar useAuth från AuthContext
+
 const AdminPage = () => {
+
+  // Hämtar user från AuthContext
+  const { user } = useAuth();
+
+  console.log(user);
+
   return (
     <div>
-        <h1>Administration</h1>
+      {/* Hämtar förnamn från user och visar det om det finns, annars tom textsträng */}
+      <h1>Hej och välkommen {user ? user.firstname : ""}!</h1>
     </div>
   )
 }
