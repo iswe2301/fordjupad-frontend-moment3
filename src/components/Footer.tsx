@@ -1,7 +1,10 @@
+import "./css/Footer.css"; // Importerar CSS-fil för styling
+
 const Footer = () => {
     return (
         <footer>
-            <p>© 2025 Isa Westling</p>
+            {/* Skriv ut aktuellt år */}
+            <p>&copy; {new Date().getFullYear()} BloggPortalen</p>
         </footer>
     )
 }
