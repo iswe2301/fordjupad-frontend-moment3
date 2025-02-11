@@ -13,6 +13,7 @@ const AdminPage = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
 
@@ -48,6 +49,8 @@ const AdminPage = () => {
 
       } catch (error) {
         setError("Kunde inte hämta inlägg.");
+      } finally {
+        setLoading(false); // Sätt loading till false
       }
     };
 
@@ -239,7 +242,11 @@ const AdminPage = () => {
       {/* Lista befintliga inlägg */}
       <div className="admin-posts">
         <h3>Mina inlägg</h3>
-        {/* Kontrollera om det finns inlägg och visa dem, annars visa meddelande */}
+        {/* Visa laddningsmeddelane om inlägg laddas */}
+        {loading && <p className="loading-message">Laddar inlägg...</p>}
+        {/* Visa felmeddelande om det uppstår ett fel */}
+        {error && <p className="error-message">{error}</p>}
+        {/* Kontrollera om det finns inlägg och visa dem */}
         {posts.length > 0 ? (
           <ul>
             {/* Loopa igenom inläggen och visa dem */}
@@ -256,7 +263,8 @@ const AdminPage = () => {
             ))}
           </ul>
         ) : (
-          <p>Inga inlägg hittades.</p>
+          // Visa meddelande om inga inlägg hittades och om det inte laddas
+          !loading && <p>Inga inlägg hittades.</p>
         )}
       </div>
       {/* Bekräftelsemddelande */}
