@@ -140,6 +140,7 @@ const AdminPage = () => {
     setEditingPost(post); // Sätt inlägget som ska redigeras i state
     setTitle(post.title); // Sätt titeln i formuläret
     setContent(post.content); // Sätt innehållet i formuläret
+    setError(""); // Rensa felmeddelande
     formRef.current?.scrollIntoView({ behavior: "smooth" }); // Scrolla till formuläret
   };
 
