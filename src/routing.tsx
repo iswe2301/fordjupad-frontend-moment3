@@ -7,6 +7,7 @@ import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PostDetailPage from "./pages/PostDetailPage";
 
 // Skapar en router
 const router = createBrowserRouter([
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
             {
                 path: "/logga-in", // Sökväg för inloggningssidan
                 element: <LoginPage /> // Komponent som ska visas
+            },
+            {
+                path: "*", // Sökväg för 404-sidan
+                element: <h1>404 - Sidan hittades inte</h1> // Visa felmeddelande
+            },
+            {
+                path: "/post/:id", // Sökväg för enskilt blogginlägg
+                element: <PostDetailPage /> // Komponent som ska visas
             }
         ]
     }
