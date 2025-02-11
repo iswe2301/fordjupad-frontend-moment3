@@ -62,11 +62,15 @@ const AdminPage = () => {
       const placeholderEl = document.querySelector(".jodit-placeholder");
       // Kontrollera om elementet finns och ändra placeholder-texten
       if (placeholderEl) {
-        placeholderEl.innerHTML = "Skriv ditt innehåll...";
+        if (content) {
+          placeholderEl.innerHTML = ""; // Ta bort placeholder-texten om det finns innehåll
+        } else {
+          placeholderEl.innerHTML = "Skriv ditt innehåll..."; // Annars sätt placeholder-texten
+        }
       }
     }, 500); // Timeout för att säkerställa att editorn är inladdad
 
-  }, []);
+  }, [content]); // Uppdatera när innehållet ändras
 
   // Funktion för att visa bekreftelsemeddelanden
   const showNotification = (message: string) => {
