@@ -1,0 +1,77 @@
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Navigering */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Logotyp */
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f4a261 !important;
+}
+
+/* Listor i nav */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Knappar i navigeringen */
+nav button {
+    padding: 0.4rem 0.8rem;
+}
+
+/* Länkar i navigeringen */
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+/* Aktiv länk + hover */
+nav a.active, nav a:hover {
+    color: #f4a261;
+}
+
+/* Mobilanpassning */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    nav ul {
+        gap: 2rem;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    header {
+        padding: 1rem 0.5rem 1.5rem 0.5rem;
+    }
+}
