@@ -28,7 +28,7 @@ const AdminPage = () => {
       const token = localStorage.getItem("token");
 
       try {
-        const res = await fetch("http://localhost:5000/api/posts/my-posts", {
+        const res = await fetch("https://fordjupad-frontend-moment3-api.onrender.com/api/posts/my-posts", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5000/api/posts", {
+      const res = await fetch("https://fordjupad-frontend-moment3-api.onrender.com/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${_id}`, {
+      const res = await fetch(`https://fordjupad-frontend-moment3-api.onrender.com/api/posts/${_id}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`, // Skicka med token
@@ -172,7 +172,7 @@ const AdminPage = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${editingPost._id}`, {
+      const res = await fetch(`https://fordjupad-frontend-moment3-api.onrender.com/api/posts/${editingPost._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

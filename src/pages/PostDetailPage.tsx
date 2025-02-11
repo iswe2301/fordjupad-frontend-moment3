@@ -18,7 +18,7 @@ const PostDetail = () => {
         const fetchPost = async () => {
             try {
                 setLoading(true); // Uppdatera state för laddning
-                const res = await fetch(`http://localhost:5000/api/posts/${id}`);
+                const res = await fetch(`https://fordjupad-frontend-moment3-api.onrender.com/api/posts/${id}`);
 
                 if (!res.ok) {
                     throw new Error("Kunde inte hämta blogginlägget.");

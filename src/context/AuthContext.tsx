@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Genomför ett POST-anrop till backend
         try {
-            const res = await fetch("http://localhost:5000/api/auth/login", {
+            const res = await fetch("https://fordjupad-frontend-moment3-api.onrender.com/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Genomför ett GET-anrop till backend
         try {
-            const res = await fetch("http://localhost:5000/api/auth/checkToken", {
+            const res = await fetch("https://fordjupad-frontend-moment3-api.onrender.com/api/auth/checkToken", {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json",
