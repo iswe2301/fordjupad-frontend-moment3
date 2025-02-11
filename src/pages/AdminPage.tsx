@@ -212,7 +212,18 @@ const AdminPage = () => {
             onChange={(e) => setContent(e.target.value)} // Uppdatera innehåll vid ändring
           />
           {/* Knapp för att skapa/redigera inlägg */}
-          <button type="submit">{editingPost ? "Uppdatera inlägg" : "Skapa inlägg"}</button>
+          <button type="submit">
+            {editingPost ? (
+              <>
+                <i className="bi bi-pencil-square"></i> Uppdatera inlägg
+              </>
+            ) : (
+              <>
+                <i className="bi bi-plus-circle"></i> Skapa inlägg
+              </>
+            )}
+          </button>
+
         </form>
       </div>
 
@@ -228,8 +239,8 @@ const AdminPage = () => {
                 <h4>{post.title}</h4>
                 <p>{post.content}</p>
                 <div className="admin-buttons">
-                  <button onClick={() => startEditing(post)}>Redigera</button> {/* Starta redigering av inlägg */}
-                  <button onClick={() => deletePost(post._id)}>Radera</button> {/* Radera inlägg */}
+                  <button onClick={() => startEditing(post)}><i className="bi bi-pencil"></i> Redigera</button> {/* Redigera inlägg */}
+                  <button onClick={() => deletePost(post._id)}> <i className="bi bi-trash"></i> Radera</button> {/* Radera inlägg */}
                 </div>
               </li>
             ))}

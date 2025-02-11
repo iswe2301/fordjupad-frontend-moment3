@@ -21,7 +21,7 @@ const Header = () => {
                     </li>
                     <li>
                         {/* Kontrollera om användaren är inloggad, om ja, visa knapp för att logga ut (anropar log-out funktion), annars visa länk till inloggningssidan */}
-                        {user ? <button onClick={logout}>Logga ut</button> : <NavLink to="/logga-in">Logga in</NavLink>}
+                        {user ? <button onClick={logout}><i className="bi bi-box-arrow-right"></i> Logga ut</button> : <NavLink to="/logga-in">Logga in</NavLink>}
                     </li>
                 </ul>
             </nav>

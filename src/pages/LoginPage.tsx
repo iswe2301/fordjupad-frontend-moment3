@@ -90,7 +90,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Logga in</button>
+          <button type="submit"><i className="bi bi-box-arrow-in-right"></i> Logga in</button>
         </form>
       </div >
     </div >
