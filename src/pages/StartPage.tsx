@@ -36,7 +36,7 @@ const StartPage = () => {
 
   return (
     <div className="start-page-container">
-      <h1>Senaste inlägg</h1>
+      <h1>Senaste inläggen</h1>
 
       {/* Visa laddningstext */}
       {loading && <p className="loading-message">Laddar...</p>}
@@ -50,10 +50,10 @@ const StartPage = () => {
           {posts.map((post) => (
             <li key={post._id} className="post-item">
               <h2>{post.title}</h2>
-              {/* Visa första 100 tecken av blogginlägget */}
-              <p>{post.content.substring(0, 100)}...</p>
+              {/* Visa första 200 tecken av blogginlägget */}
+              <p>{post.content.substring(0, 200)}...</p>
               {/* Länk till blogginlägget */}
-              <button><Link to={`/post/${post._id}`} className="read-more">Läs mer →</Link></button>
+              <button><Link to={`/post/${post._id}`} className="read-more">Läs mer <i className="bi bi-arrow-right"></i></Link></button>
             </li>
           ))}
         </ul>
