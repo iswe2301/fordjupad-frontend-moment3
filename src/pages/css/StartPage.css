@@ -1,0 +1,53 @@
+/* Container för blogginglägg */
+.start-page-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Lista av inlägg */
+.posts-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+/* Inlägg i listan */
+.post-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.post-item:hover {
+    background: #e9ecef;
+}
+
+/* Läsmer-knapp */
+.read-more {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.start-page-container button {
+    max-width: 150px;
+    margin: 2rem 0 0 0;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Mobilanpassning */
+@media (max-width: 600px) {
+    .start-page-container {
+        padding: 1rem;
+    }
+
+    .start-page-container button {
+        max-width: 100%;
+    }
+}
