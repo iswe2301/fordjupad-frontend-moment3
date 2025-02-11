@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Link för att skapa länkar
 import { Post } from "../types/post.types"; // Interface för blogginlägg
+import "./css/StartPage.css"; // CSS
 
 const StartPage = () => {
 
@@ -34,28 +35,30 @@ const StartPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="start-page-container">
       <h1>Senaste inlägg</h1>
-      {/* Visa laddning och felmeddelande om de är true/existerar */}
-      {loading && <p>Laddar...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* Visa blogginlägg om de existerar, annars visa meddelande */}
-      {posts.length > 0 ? (
-        <ul>
-          {/* Loopa igenom alla blogginlägg och visa dem */}
+      {/* Visa laddningstext */}
+      {loading && <p className="loading-message">Laddar...</p>}
+
+      {/* Visa eventuellt felmeddelande */}
+      {error && <p className="error-message">{error}</p>}
+
+      {/* Visa lista av blogginlägg eller "inga inlägg"-meddelande */}
+      {!loading && posts.length > 0 ? (
+        <ul className="posts-list">
           {posts.map((post) => (
-            <li key={post._id}>
+            <li key={post._id} className="post-item">
               <h2>{post.title}</h2>
+              {/* Visa första 100 tecken av blogginlägget */}
               <p>{post.content.substring(0, 100)}...</p>
-              {/* Länk till enskilt blogginlägg */}
-              <Link to={`/post/${post._id}`}>Läs mer</Link>
+              {/* Länk till blogginlägget */}
+              <button><Link to={`/post/${post._id}`} className="read-more">Läs mer →</Link></button>
             </li>
           ))}
         </ul>
       ) : (
-        /* Visa meddelande om inga blogginlägg hittades */
-        !loading && <p>Inga blogginlägg hittades.</p>
+        !loading && <p className="no-posts-message">Inga blogginlägg hittades.</p>
       )}
     </div>
   );
