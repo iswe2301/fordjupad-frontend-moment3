@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+}
+
+h1 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+}
+
+input {
+  font-size: 0.9rem;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  margin-top: 62px;
+}
+
+/* Knappar */
+button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  background-color: #f4a261;
+}
+
+button:hover {
+  background-color: #f38d3a;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+}
+
+button a:hover {
+  color: white;
+}
+
+/* Felmeddelane */
+.error-message {
+  background-color: #ffcccc;
+  color: #d8000c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+/* Laddningstext */
+.loading-message {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Meddelande om inga inlägg finns */
+.no-posts-message {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Mobilanpassning */
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+    margin-top: 117px;
+  }
+}
