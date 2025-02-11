@@ -76,6 +76,10 @@
     padding-top: 1rem;
 }
 
+.admin-buttons button {
+    width: 150px;
+}
+
 /* Bekräftelsemeddelande */
 .notification {
     position: fixed;
