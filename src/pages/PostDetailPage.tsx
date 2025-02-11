@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom"; // Hook för att hämta parametrar från URL:endpoint
 import { Post } from "../types/post.types"; // Interface för blogginlägg
 import "./css/PostDetailPage.css"; // CSS
+import { format } from "date-fns"; // Funktion för att formatera datum
 
 const PostDetail = () => {
 
@@ -47,10 +48,12 @@ const PostDetail = () => {
                     <h1 className="post-title">{post.title}</h1>
                     {/* Visa författare om den finns, annars visa "Okänd" */}
                     <p className="post-author">
-                        Skrivet av {post.author?.firstname && post.author?.lastname ? `${post.author.firstname} ${post.author.lastname}` : "Okänd"}
+                        Postat av {post.author?.firstname && post.author?.lastname ?
+                            `${post.author.firstname} ${post.author.lastname}` : "Okänd"}
+                        {post.createdAt && ` ${format(new Date(post.createdAt), "yyyy-MM-dd")}`}
                     </p>
                     <p className="post-content">{post.content}</p>
-                    <button><Link to="/" className="back-link">← Tillbaka</Link></button>
+                    <button><Link to="/" className="back-link"><i className="bi bi-arrow-left"></i> Tillbaka</Link></button>
                 </div>
             ) : (
                 !loading &&
