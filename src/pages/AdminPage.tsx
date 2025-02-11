@@ -263,8 +263,8 @@ const AdminPage = () => {
             ))}
           </ul>
         ) : (
-          // Visa meddelande om inga inlägg hittades och om det inte laddas
-          !loading && <p>Inga inlägg hittades.</p>
+          // Visa meddelande om inga inlägg hittades
+          !loading && <p className="no-posts-message">Inga inlägg hittades.</p>
         )}
       </div>
       {/* Bekräftelsemddelande */}
