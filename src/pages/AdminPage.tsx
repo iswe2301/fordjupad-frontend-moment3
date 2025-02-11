@@ -254,7 +254,7 @@ const AdminPage = () => {
               <li key={post._id}>
                 <h4>{post.title}</h4>
                 {/* Visa inläggets innehåll som HTML, sanerat med DOMPurify */}
-                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></p>
+                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
                 <div className="admin-buttons">
                   <button onClick={() => startEditing(post)}><i className="bi bi-pencil"></i> Redigera</button> {/* Redigera inlägg */}
                   <button onClick={() => deletePost(post._id)}> <i className="bi bi-trash"></i> Radera</button> {/* Radera inlägg */}

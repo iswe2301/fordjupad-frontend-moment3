@@ -54,14 +54,14 @@ const PostDetail = () => {
                         {post.createdAt && ` ${format(new Date(post.createdAt), "yyyy-MM-dd")}`}
                     </p>
                     {/* Visa blogginlägget som HTML, sanerat med DOMPurify */}
-                    <p className="post-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></p>
-                    <button><Link to="/" className="back-link"><i className="bi bi-arrow-left"></i> Tillbaka</Link></button>
+                    <div className="post-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
+                    <Link to="/" className="back-link btn"><i className="bi bi-arrow-left"></i> Tillbaka</Link>
                 </div>
             ) : (
                 !loading &&
                 <div>
                     <p>Inlägget hittades inte.</p>
-                    <button><Link to="/" className="back-link">← Tillbaka</Link></button>
+                    <Link to="/" className="back-link btn"><i className="bi bi-arrow-left"></i> Tillbaka</Link>
                 </div>
             )}
         </div>

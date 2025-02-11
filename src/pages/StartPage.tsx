@@ -53,9 +53,9 @@ const StartPage = () => {
             <li key={post._id} className="post-item">
               <h2>{post.title}</h2>
               {/* Visa första 200 tecken av blogginlägget i html, sanerat med DOMPurify */}
-              <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncate(post.content, 200)) }}></p>
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncate(post.content, 200)) }}></div>
               {/* Länk till blogginlägget */}
-              <button><Link to={`/post/${post._id}`} className="read-more">Läs mer <i className="bi bi-arrow-right"></i></Link></button>
+              <Link to={`/post/${post._id}`} className="read-more btn">Läs mer <i className="bi bi-arrow-right"></i></Link>
             </li>
           ))}
         </ul>
