@@ -40,6 +40,11 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   background-color: #f4a261;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
 }
 
 button:hover {
