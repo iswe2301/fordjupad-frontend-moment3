@@ -1,0 +1,56 @@
+/* Container för enskilt inlägg */
+.post-detail-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel */
+.post-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Författare */
+.post-author {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+/* Länk tillbaka */
+.back-link {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* Knapp */
+.post-detail-container button {
+    max-width: 150px;
+    margin: 2rem 0 0 0;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Mobilanpassning */
+@media (max-width: 600px) {
+    .post-detail-container {
+        padding: 10px;
+    }
+
+    .post-title {
+        font-size: 1.2rem;
+    }
+
+    .post-author {
+        font-size: 0.8rem;
+    }
+
+    .post-detail-container button {
+        max-width: 100%;
+    }
+}
