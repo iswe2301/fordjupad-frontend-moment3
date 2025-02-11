@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext"; // Context för autentisering
 import { Post } from "../types/post.types"; // Interface för blogginlägg
 import "./css/AdminPage.css"; // CSS
 import DOMPurify from "dompurify"; // För att sanera HTML
+import JoditEditor from "jodit-react"; // WYSIWYG-editor
 
 const AdminPage = () => {
 
@@ -51,6 +52,17 @@ const AdminPage = () => {
     };
 
     fetchPosts();
+
+    // Vänta på att editorn laddas
+    setTimeout(() => {
+      // Hämta placeholder-elementet
+      const placeholderEl = document.querySelector(".jodit-placeholder");
+      // Kontrollera om elementet finns och ändra placeholder-texten
+      if (placeholderEl) {
+        placeholderEl.innerHTML = "Skriv ditt innehåll...";
+      }
+    }, 500); // Timeout för att säkerställa att editorn är inladdad
+
   }, []);
 
   // Funktion för att visa bekreftelsemeddelanden
@@ -66,7 +78,7 @@ const AdminPage = () => {
 
     // Kontrollera att titel och innehåll finns
     if (!title || !content) {
-      setError("Titel och innehåll måste anges."); // Uppdatera state med felmeddelande
+      setError("Fyll i både inläggets titel och innehåll"); // Uppdatera state med felmeddelande
       return;
     }
 
@@ -206,12 +218,8 @@ const AdminPage = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)} // Uppdatera titel (state) vid ändring
           />
-          <textarea
-            placeholder="Innehåll"
-            rows={5}
-            value={content}
-            onChange={(e) => setContent(e.target.value)} // Uppdatera innehåll vid ändring
-          />
+          {/* WYSIWYG-editor för innehåll */}
+          <JoditEditor className="custom-editor" value={content} onChange={setContent} />
           {/* Knapp för att skapa/redigera inlägg */}
           <button type="submit">
             {editingPost ? (

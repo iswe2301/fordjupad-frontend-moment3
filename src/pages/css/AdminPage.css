@@ -96,6 +96,25 @@
     opacity: 0;
 }
 
+/* Jodit-editor */
+.custom-editor .jodit-container {
+    height: 400px !important;
+}
+
+.custom-editor .jodit-workplace {
+    min-height: 200px !important;
+    max-height: 600px !important;
+}
+
+.custom-editor .jodit-workplace p {
+    padding: 0 0.5rem !important;
+}
+
+.custom-editor .jodit-placeholder {
+    padding: 1rem !important;
+    margin-top: 0.5rem !important;
+}
+
 @media (max-width: 600px) {
     .admin-container {
         padding: 1rem;
