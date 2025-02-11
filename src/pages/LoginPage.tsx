@@ -31,7 +31,7 @@ const LoginPage = () => {
 
     // Validerar att fälten inte är tomma
     if (!email || !password) {
-      setError("Både e-post och lösenord måste anges.");
+      setError("Både e-post och lösenord måste anges");
       return;
     }
 
@@ -55,7 +55,8 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Logga in på ditt konto</h1>
+        <h1>Logga in</h1>
+        <h2>Mina sidor</h2>
 
         {/* Formulär för att logga in, anropar handleSubmit-funktionen vid submit */}
         <form onSubmit={handleSubmit}>
