@@ -9,6 +9,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Hämtar user och login från AuthContext
   const { user, login } = useAuth();
@@ -28,10 +29,12 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Förhindrar att formuläret skickas
     setError(""); // Nollställer error i state
+    setLoading(true); // Sätter loading till true
 
     // Validerar att fälten inte är tomma
     if (!email || !password) {
       setError("Både e-post och lösenord måste anges");
+      setLoading(false); // Sätter loading till false
       return;
     }
 
@@ -39,6 +42,7 @@ const LoginPage = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Ange en giltig e-postadress.");
+      setLoading(false); // Sätter loading till false
       return;
     }
 
@@ -48,8 +52,9 @@ const LoginPage = () => {
       navigate("/mina-sidor"); // Navigerar till mina sidor om inloggningen lyckas
     } catch (error) {
       setError("Inloggningen misslyckades. Kontrollera att du angett rätt e-post och lösenord."); // Sätter error i state om inloggningen misslyckas
+    } finally {
+      setLoading(false); // Sätter loading till false
     }
-
   };
 
   return (
@@ -87,10 +92,12 @@ const LoginPage = () => {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)} disabled={loading}
             />
           </div>
-          <button type="submit"><i className="bi bi-box-arrow-in-right"></i> Logga in</button>
+          <button type="submit" disabled={loading}>
+            {loading ? <><i className="bi bi-arrow-clockwise"></i> Loggar in...</> : <><i className="bi bi-box-arrow-in-right"></i> Logga in</>}
+          </button>
         </form>
       </div >
     </div >
