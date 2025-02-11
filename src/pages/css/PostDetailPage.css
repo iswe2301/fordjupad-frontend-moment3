@@ -26,6 +26,8 @@
 /* Länk tillbaka */
 .back-link {
     text-decoration: none;
+    display: inline-block;
+    margin: 1rem 0 0 0;
 }
 
 /* Knapp */
@@ -52,5 +54,11 @@
 
     .post-detail-container button {
         max-width: 100%;
+    }
+
+    .back-link {
+        width: 100%;
+        text-align: center;
+        margin: 1rem 0 0.5rem 0;
     }
 }

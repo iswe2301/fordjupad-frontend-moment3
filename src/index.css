@@ -42,7 +42,8 @@ main {
 }
 
 /* Knappar */
-button {
+button,
+.btn {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   background-color: #f4a261;
