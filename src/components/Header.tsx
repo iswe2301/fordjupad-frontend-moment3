@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom" // Importerar komponenten NavLink för att skapa länkar
+import { NavLink, Link } from "react-router-dom" // Importerar komponenten NavLink för att skapa länkar
 import { useAuth } from "../context/AuthContext" // Importerar useAuth från AuthContext
+import "./css/Header.css" // Importerar CSS-fil för styling
 
 const Header = () => {
 
@@ -9,6 +10,8 @@ const Header = () => {
     return (
         <header>
             <nav>
+                {/* Skapar en länk till startsidan */}
+                <div className="logo"><Link to="/">BloggPortalen</Link></div>
                 <ul>
                     {/* Skapar länkar till startsidan, mina sidor och inloggningssidan */}
                     <li><NavLink to="/">Start</NavLink></li>
