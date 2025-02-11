@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom"; // Hook för att hämta para
 import { Post } from "../types/post.types"; // Interface för blogginlägg
 import "./css/PostDetailPage.css"; // CSS
 import { format } from "date-fns"; // Funktion för att formatera datum
+import DOMPurify from "dompurify"; // För att sanera HTML
 
 const PostDetail = () => {
 
@@ -52,7 +53,8 @@ const PostDetail = () => {
                             `${post.author.firstname} ${post.author.lastname}` : "Okänd"}
                         {post.createdAt && ` ${format(new Date(post.createdAt), "yyyy-MM-dd")}`}
                     </p>
-                    <p className="post-content">{post.content}</p>
+                    {/* Visa blogginlägget som HTML, sanerat med DOMPurify */}
+                    <p className="post-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></p>
                     <button><Link to="/" className="back-link"><i className="bi bi-arrow-left"></i> Tillbaka</Link></button>
                 </div>
             ) : (

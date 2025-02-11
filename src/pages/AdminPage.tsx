@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"; // Hooks från React
 import { useAuth } from "../context/AuthContext"; // Context för autentisering
 import { Post } from "../types/post.types"; // Interface för blogginlägg
 import "./css/AdminPage.css"; // CSS
+import DOMPurify from "dompurify"; // För att sanera HTML
 
 const AdminPage = () => {
 
@@ -237,7 +238,8 @@ const AdminPage = () => {
             {posts.map((post) => (
               <li key={post._id}>
                 <h4>{post.title}</h4>
-                <p>{post.content}</p>
+                {/* Visa inläggets innehåll som HTML, sanerat med DOMPurify */}
+                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></p>
                 <div className="admin-buttons">
                   <button onClick={() => startEditing(post)}><i className="bi bi-pencil"></i> Redigera</button> {/* Redigera inlägg */}
                   <button onClick={() => deletePost(post._id)}> <i className="bi bi-trash"></i> Radera</button> {/* Radera inlägg */}

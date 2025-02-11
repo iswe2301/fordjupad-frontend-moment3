@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Link för att skapa länkar
 import { Post } from "../types/post.types"; // Interface för blogginlägg
 import "./css/StartPage.css"; // CSS
+import DOMPurify from "dompurify"; // För att sanera HTML
+import truncate from "html-truncate"; // För att förkorta HTML
 
 const StartPage = () => {
 
@@ -50,8 +52,8 @@ const StartPage = () => {
           {posts.map((post) => (
             <li key={post._id} className="post-item">
               <h2>{post.title}</h2>
-              {/* Visa första 200 tecken av blogginlägget */}
-              <p>{post.content.substring(0, 200)}...</p>
+              {/* Visa första 200 tecken av blogginlägget i html, sanerat med DOMPurify */}
+              <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truncate(post.content, 200)) }}></p>
               {/* Länk till blogginlägget */}
               <button><Link to={`/post/${post._id}`} className="read-more">Läs mer <i className="bi bi-arrow-right"></i></Link></button>
             </li>
