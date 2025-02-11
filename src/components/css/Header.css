@@ -40,6 +40,7 @@ nav ul {
 /* Knappar i navigeringen */
 nav button {
     padding: 0.4rem 0.8rem;
+    font-size: 1.1rem;
 }
 
 /* Länkar i navigeringen */
