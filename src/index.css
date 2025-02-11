@@ -19,6 +19,12 @@ h2 {
   color: #333;
 }
 
+p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
 input {
   font-size: 0.9rem;
 }
@@ -88,5 +94,13 @@ button a:hover {
   main {
     padding: 1rem;
     margin-top: 117px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
   }
 }
