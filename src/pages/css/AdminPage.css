@@ -37,10 +37,6 @@
     box-sizing: border-box;
 }
 
-.admin-form button {
-    max-width: 200px;
-}
-
 .admin-form button:hover {
     background-color: #f38d3a;
 }
@@ -119,14 +115,40 @@
     margin-top: 0.5rem !important;
 }
 
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.button-container button {
+    width: 200px;
+}
+
+.cancel-button {
+    background-color: #f8d7da;
+    color: #721c24;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #f5c6cb !important;
+}
+
+.cancel-button:disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.cancel-button:disabled:hover {
+    background-color: #ddd !important;
+}
+
 @media (max-width: 600px) {
     .admin-container {
         padding: 1rem;
         margin: 2rem auto;
-    }
-
-    .admin-form button {
-        max-width: 100%;
     }
 
     .notification {
@@ -144,5 +166,10 @@
 
     .admin-buttons button {
         width: 100%;
+    }
+
+    .button-container button {
+        width: 100%;
+        padding: 0.5rem;
     }
 }

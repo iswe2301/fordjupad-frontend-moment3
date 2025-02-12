@@ -87,6 +87,14 @@ const AdminPage = () => {
     }, 300); // Timeout för att säkerställa att inlägget finns i DOM
   };
 
+  // Funktion för att nollställa formuläret (avbryta)
+  const resetForm = () => {
+    setTitle("");
+    setContent("");
+    setEditingPost(null);
+    setFormError("");
+  };
+
   // Funktion för att skapa ett nytt inlägg
   const createPost = async (e: React.FormEvent) => {
 
@@ -245,18 +253,27 @@ const AdminPage = () => {
           {/* WYSIWYG-editor för innehåll */}
           <JoditEditor className="custom-editor" value={content} onChange={setContent} />
           {/* Knapp för att skapa/redigera inlägg */}
-          <button type="submit">
-            {editingPost ? (
-              <>
-                <i className="bi bi-pencil-square"></i> Uppdatera inlägg
-              </>
-            ) : (
-              <>
-                <i className="bi bi-plus-circle"></i> Skapa inlägg
-              </>
-            )}
-          </button>
-
+          <div className="button-container">
+            <button type="submit">
+              {editingPost ? (
+                <>
+                  <i className="bi bi-pencil-square"></i> Uppdatera inlägg
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-plus-circle"></i> Skapa inlägg
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={!title && !content}
+              className="cancel-button"
+            >
+              <i className="bi bi-x-circle"></i> Rensa
+            </button>
+          </div>
         </form>
       </div>
 
