@@ -12,13 +12,15 @@ const AdminPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [listError, setListError] = useState<string>(""); // Felmeddelande för listan
+  const [formError, setFormError] = useState<string>(""); // Felmeddelande för formuläret
   const [loading, setLoading] = useState<boolean>(true);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
 
-  // Referens till formuläret
+  // Referens till formuläret och inlägg
   const formRef = useRef<HTMLDivElement>(null);
+  const postRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
 
   // Hämta alla inlägg för den specifika användaren när komponenten renderas
   useEffect(() => {
@@ -48,7 +50,7 @@ const AdminPage = () => {
         setPosts(data);
 
       } catch (error) {
-        setError("Kunde inte hämta inlägg.");
+        setListError("Kunde inte hämta inlägg.");
       } finally {
         setLoading(false); // Sätt loading till false
       }
@@ -78,6 +80,13 @@ const AdminPage = () => {
     setTimeout(() => setNotification(null), 3000); // Ta bort meddelandet efter 3 sekunder
   };
 
+  // Funktion för att skrolla till ett inlägg
+  const scrollToPost = (postId: string) => {
+    setTimeout(() => {
+      postRefs.current[postId]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300); // Timeout för att säkerställa att inlägget finns i DOM
+  };
+
   // Funktion för att skapa ett nytt inlägg
   const createPost = async (e: React.FormEvent) => {
 
@@ -85,7 +94,7 @@ const AdminPage = () => {
 
     // Kontrollera att titel och innehåll finns
     if (!title || !content) {
-      setError("Fyll i både inläggets titel och innehåll"); // Uppdatera state med felmeddelande
+      setFormError("Fyll i både inläggets titel och innehåll"); // Uppdatera state med felmeddelande
       return;
     }
 
@@ -107,20 +116,21 @@ const AdminPage = () => {
 
       // Kontrollera om anropet lyckades och visa annars felmeddelande
       if (!res.ok) {
-        setError(data.message || "Kunde inte skapa inlägg."); // Uppdatera state med felmeddelande
+        setFormError(data.message || "Kunde inte skapa inlägg."); // Uppdatera state med felmeddelande
         return;
       }
 
       setPosts([...posts, data.post]); // Uppdatera state med det nya inlägget
       setTitle(""); // Rensa fält för titel
       setContent(""); // Rensa fält för innehåll
-      setError(""); // Nollställ eventuella fel
+      setFormError(""); // Nollställ eventuella fel
 
       showNotification("Inlägget skapades!"); // Visa bekräftelse
+      scrollToPost(data.post._id); // Skrolla till det nya inlägget
 
     } catch (error) {
       console.error("Fel vid skapande av inlägg:", error);
-      setError("Kunde inte skapa inlägg.");
+      setFormError("Kunde inte skapa inlägg.");
     }
   };
 
@@ -150,7 +160,7 @@ const AdminPage = () => {
       setPosts(posts.filter(post => post._id !== _id)); // Uppdatera state utan det raderade inlägget (filtrera bort)
       showNotification("Inlägget raderades!"); // Visa bekräftelse
     } catch (error) {
-      setError("Kunde inte radera inlägg.");
+      setListError("Kunde inte radera inlägg.");
     }
   };
 
@@ -160,7 +170,7 @@ const AdminPage = () => {
     setEditingPost(post); // Sätt inlägget som ska redigeras i state
     setTitle(post.title); // Sätt titeln i formuläret
     setContent(post.content); // Sätt innehållet i formuläret
-    setError(""); // Rensa felmeddelande
+    setFormError(""); // Rensa felmeddelande
     formRef.current?.scrollIntoView({ behavior: "smooth" }); // Scrolla till formuläret
   };
 
@@ -171,6 +181,12 @@ const AdminPage = () => {
 
     // Kontrollera att det finns ett inlägg att redigera
     if (!editingPost) return;
+
+    // Kontrollera att titel och innehåll finns
+    if (!title || !content) {
+      setFormError("Fyll i både inläggets titel och innehåll"); // Uppdatera state med felmeddelande
+      return;
+    }
 
     // Hämta token från localStorage
     const token = localStorage.getItem("token");
@@ -190,7 +206,7 @@ const AdminPage = () => {
 
       // Kontrollera om anropet lyckades och visa annars felmeddelande
       if (!res.ok) {
-        setError(data.message || "Kunde inte uppdatera inlägg.");
+        setFormError(data.message || "Kunde inte uppdatera inlägg.");
         return;
       }
 
@@ -198,11 +214,12 @@ const AdminPage = () => {
       setEditingPost(null); // Avsluta redigering
       setTitle(""); // Rensa titel
       setContent(""); // Rensa innehåll
-      setError(""); // Rensa felmeddelande
+      setFormError(""); // Rensa felmeddelande
 
       showNotification("Inlägget uppdaterades!"); // Visa bekräftelse
+      scrollToPost(data.post._id); // Skrolla till det uppdaterade inlägget
     } catch (error) {
-      setError("Kunde inte uppdatera inlägg.");
+      setFormError("Kunde inte uppdatera inlägg.");
     }
   };
 
@@ -218,7 +235,7 @@ const AdminPage = () => {
         <form onSubmit={editingPost ? updatePost : createPost}>
           {/* Rubrik beroende på om ett inlägg redigeras eller skapas */}
           <h3>{editingPost ? "Redigera inlägg" : "Skapa nytt inlägg"}</h3>
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {formError && <p className="error-message">{formError}</p>}
           <input
             type="text"
             placeholder="Titel"
@@ -249,13 +266,13 @@ const AdminPage = () => {
         {/* Visa laddningsmeddelane om inlägg laddas */}
         {loading && <p className="loading-message">Laddar inlägg...</p>}
         {/* Visa felmeddelande om det uppstår ett fel */}
-        {error && <p className="error-message">{error}</p>}
+        {listError && <p className="error-message">{listError}</p>}
         {/* Kontrollera om det finns inlägg och visa dem */}
         {posts.length > 0 ? (
           <ul>
             {/* Loopa igenom inläggen och visa dem */}
             {posts.map((post) => (
-              <li key={post._id}>
+              <li key={post._id} ref={(el) => { if (el) postRefs.current[post._id] = el; }}> {/* Referens till inlägget */}
                 <h4>{post.title}</h4>
                 {/* Visa inläggets innehåll som HTML, sanerat med DOMPurify */}
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}></div>
