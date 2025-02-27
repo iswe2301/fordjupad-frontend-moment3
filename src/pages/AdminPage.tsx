@@ -91,7 +91,6 @@ const AdminPage = () => {
   const resetForm = () => {
     setTitle("");
     setContent("");
-    setEditingPost(null);
     setFormError("");
   };
 
