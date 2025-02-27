@@ -251,7 +251,7 @@ const AdminPage = () => {
             onChange={(e) => setTitle(e.target.value)} // Uppdatera titel (state) vid ändring
           />
           {/* WYSIWYG-editor för innehåll */}
-          <JoditEditor className="custom-editor" value={content} onChange={setContent} />
+          <JoditEditor className="custom-editor" value={content} onBlur={setContent} />
           {/* Knapp för att skapa/redigera inlägg */}
           <div className="button-container">
             <button type="submit">
